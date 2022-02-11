@@ -73,9 +73,9 @@ function convertDataToRow(arr) {
           <div
             className={`p-6 ${fileStyleHandler(
               ext
-            )} rounded-xl text-4xl font-bold aspect-square flex items-center`}
+            )} rounded-xl text-4xl font-bold w-32 aspect-square flex justify-center items-center`}
           >
-            {md.name.split(".")[1].toUpperCase()}
+            {ext.toUpperCase()}
           </div>
           <p className="ml-4">{md.name}</p>
         </div>
