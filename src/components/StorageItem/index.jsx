@@ -1,7 +1,7 @@
 import React from "react";
 import { LinearProgress } from "@mui/material";
 
-export default function Index({ title, icon }) {
+export default function StorageItem({ title, icon }) {
   return (
     <div className="p-16 px-24 bg-slate-200 rounded-3xl">
       <div className="mb-16 flex items-center">
