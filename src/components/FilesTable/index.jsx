@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import store from "../../redux/store";
 import { Table } from "antd";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
+import "react-loading-skeleton/dist/skeleton.css";
 import { loadAllFiles } from "../../redux/loadThunk";
 import extensionHandler from "../../utils/extensionHandler";
 
@@ -53,7 +56,17 @@ export default function FilesTable() {
           onChange={onChange}
         />
       ) : (
-        <p>Loading...</p>
+        <SkeletonTheme>
+          <Skeleton style={{ marginBottom: "1rem", height: "5rem" }} />
+          <Skeleton
+            style={{
+              marginTop: "0.8rem",
+              marginBottom: "0.8rem",
+              height: "10rem",
+            }}
+            count={4}
+          />
+        </SkeletonTheme>
       )}
     </>
   );

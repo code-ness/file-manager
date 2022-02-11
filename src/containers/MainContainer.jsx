@@ -4,7 +4,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 
 export default function MainContainer() {
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex w-full">
       <header className="bg-blue-dark">
         <SideBar />
       </header>
