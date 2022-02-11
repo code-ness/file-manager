@@ -22,6 +22,7 @@ module.exports = {
       orange: colors.orange,
       lime: colors.lime,
       green: colors.green,
+      violet: colors.violet,
       "blue-dark": "#303654",
       "blue-dark-2": "#232842",
     },
