@@ -5,6 +5,7 @@ import PhotoLibraryRoundedIcon from "@mui/icons-material/PhotoLibraryRounded";
 import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import MusicNoteRoundedIcon from "@mui/icons-material/MusicNoteRounded";
 import VideocamRoundedIcon from "@mui/icons-material/VideocamRounded";
+import FilesTable from "../../components/FilesTable";
 
 export default function Dashboard() {
   const iconStyles = {
@@ -15,14 +16,14 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-24">
+    <div className="p-16 pb-8">
       <div className="flex justify-between items-center">
         <h2 className="text-5xl font-bold text-blue-dark">Dashboard</h2>
         <UploadButton />
       </div>
       <div className="my-12">
         <p className="mb-8 text-4xl font-semibold">Storage</p>
-        <div className="flex justify-between">
+        <div className="grid grid-cols-4 gap-16">
           <StorageItem
             title="Images"
             icon={
@@ -58,13 +59,8 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="my-12">
-        <p className="mb-8 text-4xl font-semibold">Recent Files</p>
-        <div className="w-3/4 grid grid-cols-[2fr_1fr_1fr_1fr]">
-          <h1>WOW</h1>
-          <h1>WOW</h1>
-          <h1>WOW</h1>
-          <h1>WOW</h1>
-        </div>
+        <p className="text-4xl font-semibold">Recent Files</p>
+        <FilesTable />
       </div>
     </div>
   );
