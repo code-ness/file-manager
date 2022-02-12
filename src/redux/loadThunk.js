@@ -33,13 +33,18 @@ export function loadAllFiles() {
       const music = await Promise.all(
         resMsc.items.map((item) => getMetadata(item))
       );
-      dispatch(allFilesActions.add([...images, ...docs, ...videos, ...music]));
+      dispatch(
+        allFilesActions.addFiles([...images, ...docs, ...videos, ...music])
+      );
+      dispatch(allFilesActions.addImages(images));
+      dispatch(allFilesActions.addDocs(docs));
+      dispatch(allFilesActions.addVideos(videos));
+      dispatch(allFilesActions.addMusic(music));
     } catch (err) {
       console.error(err);
     }
   };
 }
-
 export function loadImages() {
   return async function (dispatch) {
     try {
