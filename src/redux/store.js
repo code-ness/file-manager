@@ -12,10 +12,22 @@ const uploadSlice = createSlice({
 
 const allFilesSlice = createSlice({
   name: "files",
-  initialState: { files: [] },
+  initialState: { files: [], images: [], docs: [], videos: [], music: [] },
   reducers: {
-    add(state, action) {
+    addFiles(state, action) {
       state.files = action.payload;
+    },
+    addImages(state, action) {
+      state.images = action.payload;
+    },
+    addDocs(state, action) {
+      state.docs = action.payload;
+    },
+    addVideos(state, action) {
+      state.videos = action.payload;
+    },
+    addMusic(state, action) {
+      state.music = action.payload;
     },
   },
 });
