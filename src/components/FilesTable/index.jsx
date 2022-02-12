@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import store from "../../redux/store";
 import { Table } from "antd";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -34,7 +35,24 @@ function onChange(pagination, filters, sorter, extra) {
 export default function FilesTable() {
   const [allReadyFiles, setAllReadyFiles] = useState([]);
   const didUpload = useSelector((state) => state.upload.didUpload);
-  const allFiles = useSelector((state) => state.allFiles.files);
+  const location = useLocation();
+  const path = location.pathname;
+
+  let allFiles = useSelector((state) => state.allFiles.files);
+  const images = useSelector((state) => state.allFiles.images);
+  const docs = useSelector((state) => state.allFiles.docs);
+  const videos = useSelector((state) => state.allFiles.videos);
+  const music = useSelector((state) => state.allFiles.music);
+
+  if (path === "/images") {
+    allFiles = images;
+  } else if (path === "/docs") {
+    allFiles = docs;
+  } else if (path === "/videos") {
+    allFiles = videos;
+  } else if (path === "/music") {
+    allFiles = music;
+  }
 
   useEffect(() => {
     if (allFiles.length === 0) return;
