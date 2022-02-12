@@ -1,11 +1,12 @@
-import StorageItem from "../../components/StorageItem";
-import UploadButton from "../../components/UploadButton";
+import { useSelector } from "react-redux";
 
+import StorageItem from "../../components/StorageItem";
 import PhotoLibraryRoundedIcon from "@mui/icons-material/PhotoLibraryRounded";
 import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import MusicNoteRoundedIcon from "@mui/icons-material/MusicNoteRounded";
 import VideocamRoundedIcon from "@mui/icons-material/VideocamRounded";
 import FilesTable from "../../components/FilesTable";
+import Header from "../../components/Header";
 
 export default function Dashboard() {
   const iconStyles = {
@@ -17,10 +18,7 @@ export default function Dashboard() {
 
   return (
     <div className="p-16 pb-8">
-      <div className="flex justify-between items-center">
-        <h2 className="text-5xl font-bold text-blue-dark">Dashboard</h2>
-        <UploadButton />
-      </div>
+      <Header title="Dashboard" />
       <div className="my-12">
         <p className="mb-8 text-4xl font-semibold">Storage</p>
         <div className="grid grid-cols-4 gap-16">
