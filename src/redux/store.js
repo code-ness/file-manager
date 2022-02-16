@@ -2,10 +2,13 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const uploadSlice = createSlice({
   name: "upload",
-  initialState: { didUpload: false },
+  initialState: { didUpload: false, isUploading: false },
   reducers: {
     upload(state) {
       state.didUpload = !state.didUpload;
+    },
+    isUploading(state) {
+      state.isUploading = !state.isUploading;
     },
   },
 });

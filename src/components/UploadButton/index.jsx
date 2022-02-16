@@ -2,12 +2,9 @@ import Button from "@mui/material/Button";
 import CloudUploadRoundedIcon from "@mui/icons-material/CloudUploadRounded";
 
 export default function UploadButton({ onAddModal }) {
-  function modalHandler() {
-    onAddModal();
-  }
   return (
     <Button
-      onClick={modalHandler}
+      onClick={() => onAddModal()}
       variant="contained"
       component="span"
       sx={{
