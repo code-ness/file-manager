@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import store from "../../redux/store";
-import { Table } from "antd";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { Table, Empty } from "antd";
 
 import "react-loading-skeleton/dist/skeleton.css";
 import { loadAllFiles } from "../../redux/loadThunk";
@@ -21,6 +20,8 @@ const columns = [
   {
     title: "Size",
     dataIndex: "size",
+    defaultSortOrder: "descend",
+    sorter: (a, b) => Number(a.size) - Number(b.size),
   },
   {
     title: "Last Modified",
@@ -29,7 +30,7 @@ const columns = [
 ];
 
 function onChange(pagination, filters, sorter, extra) {
-  console.log("params", pagination, filters, sorter, extra);
+  console.log(sorter);
 }
 
 export default function FilesTable() {
@@ -65,28 +66,15 @@ export default function FilesTable() {
   }, [didUpload]);
 
   return (
-    <>
-      {allReadyFiles.length > 0 ? (
-        <Table
-          style={{ fontSize: "2rem" }}
-          columns={columns}
-          dataSource={allReadyFiles}
-          onChange={onChange}
-        />
-      ) : (
-        <SkeletonTheme>
-          <Skeleton style={{ marginBottom: "1rem", height: "5rem" }} />
-          <Skeleton
-            style={{
-              marginTop: "0.8rem",
-              marginBottom: "0.8rem",
-              height: "10rem",
-            }}
-            count={4}
-          />
-        </SkeletonTheme>
-      )}
-    </>
+    <div className="text-xl">
+      <Table
+        loading={allReadyFiles.length > 0 ? false : true}
+        columns={columns}
+        dataSource={allReadyFiles.length > 0 ? allReadyFiles : [<Empty />]}
+        onChange={onChange}
+        pagination={path === "/" ? false : true}
+      ></Table>
+    </div>
   );
 }
 
