@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import store from "./redux/store";
 import Dashboard from "./pages/dashboard/Dashboard";
-import FilesLayout from "./layout/FilesLayout";
+import FilesLayout from "./components/FilesLayout";
 
 ReactDOM.render(
   <React.StrictMode>
