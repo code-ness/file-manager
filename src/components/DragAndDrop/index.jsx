@@ -1,48 +1,65 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { storage } from "../../firebase";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDispatch } from "react-redux";
 import { uploadActions } from "../../redux/store";
 import { useDropzone } from "react-dropzone";
 import extensionHandler from "../../utils/extensionHandler";
+import { Alert } from "@mui/material";
 
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import FolderIcon from "../../assets/folder.png";
+import { display } from "@mui/system";
 
 export default function DragAndDrop({ onClose }) {
+  const [isInvalid, setIsInvalid] = useState(false);
   const dispatch = useDispatch();
 
   function dispatchUpload() {
     dispatch(uploadActions.upload());
-    console.log("UPLOAD");
+  }
+
+  function dispatchIsUploading() {
+    dispatch(uploadActions.isUploading());
   }
 
   function onDrop(files) {
+    let isFileTypeValid = true;
+    dispatchIsUploading();
     const file = files[0];
     const ext = extensionHandler(file.name);
-    let isInvalid = false;
     (async function () {
       if (ext === "img") {
         const imgRef = ref(storage, `images/${file.name}`);
         await uploadBytes(imgRef, file).then(() => {
-          console.log("UPLOADED");
           dispatchUpload();
+          dispatchIsUploading();
         });
       } else if (ext === "doc") {
         const docRef = ref(storage, `docs/${file.name}`);
-        await uploadBytes(docRef, file).then(() => dispatchUpload());
+        await uploadBytes(docRef, file).then(() => {
+          dispatchUpload();
+          dispatchIsUploading();
+        });
       } else if (ext === "vid") {
         const videoRef = ref(storage, `videos/${file.name}`);
-        await uploadBytes(videoRef).then(() => dispatchUpload());
+        await uploadBytes(videoRef).then(() => {
+          dispatchUpload();
+          dispatchIsUploading();
+        });
       } else if (ext === "msc") {
         const musicRef = ref(storage, `music/${file.name}`);
-        await uploadBytes(musicRef, file).then(() => dispatchUpload());
+        await uploadBytes(musicRef, file).then(() => {
+          dispatchUpload();
+          dispatchIsUploading();
+        });
       } else {
-        isInvalid = true;
-        alert("Invalid File Type");
+        dispatchIsUploading();
+        isFileTypeValid = false;
+        setIsInvalid(true);
       }
     })();
-    if (isInvalid) return;
+    if (!isFileTypeValid) return;
     onClose();
   }
 
@@ -97,6 +114,21 @@ export default function DragAndDrop({ onClose }) {
         >
           <CancelRoundedIcon sx={{ fontSize: "4rem", color: "#fff" }} />
         </button>
+        {isInvalid && (
+          <Alert
+            onClick={(e) => e.stopPropagation()}
+            className="fixed top-32 left-1/2 -translate-x-1/2 w-1/6"
+            severity="error"
+            variant="filled"
+            onClose={(e) => {
+              e.stopPropagation();
+              setIsInvalid(false);
+            }}
+            sx={{ fontSize: "1.6rem", display: "flex", alignItems: "center" }}
+          >
+            Invalid file type!
+          </Alert>
+        )}
       </div>
     </div>
   );
