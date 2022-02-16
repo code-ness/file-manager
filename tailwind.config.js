@@ -25,6 +25,7 @@ module.exports = {
       violet: colors.violet,
       "blue-dark": "#303654",
       "blue-dark-2": "#232842",
+      overlay: "rgba(0, 0, 0,0.8)",
     },
   },
   plugins: [],
