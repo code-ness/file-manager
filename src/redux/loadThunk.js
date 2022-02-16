@@ -7,6 +7,7 @@ import {
 } from "./store";
 import { ref, listAll, getMetadata } from "firebase/storage";
 import { storage } from "../firebase";
+import sortByDate from "../utils/sortByDate";
 
 export function loadAllFiles() {
   return async function (dispatch) {
@@ -34,7 +35,12 @@ export function loadAllFiles() {
         resMsc.items.map((item) => getMetadata(item))
       );
       dispatch(
-        allFilesActions.addFiles([...images, ...docs, ...videos, ...music])
+        allFilesActions.addFiles(
+          sortByDate("desc", [...images, ...docs, ...videos, ...music]).slice(
+            0,
+            3
+          )
+        )
       );
       dispatch(allFilesActions.addImages(images));
       dispatch(allFilesActions.addDocs(docs));
