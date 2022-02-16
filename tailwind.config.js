@@ -4,7 +4,16 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        pulse: {
+          "50%": { opacity: "0.5" },
+        },
+      },
+      animation: {
+        pulse: "pulse 1.2s ease-in-out infinite",
+      },
+    },
     colors: {
       transparent: "transparent",
       current: "currentColor",
@@ -25,7 +34,7 @@ module.exports = {
       violet: colors.violet,
       "blue-dark": "#303654",
       "blue-dark-2": "#232842",
-      overlay: "rgba(0, 0, 0,0.8)",
+      overlay: "rgba(0, 0, 0,0.7)",
     },
   },
   plugins: [],
