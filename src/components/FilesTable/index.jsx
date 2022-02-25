@@ -4,34 +4,10 @@ import { useLocation } from "react-router-dom";
 import store from "../../redux/store";
 import { Table, Empty } from "antd";
 
+import { columns } from "./columns";
 import "react-loading-skeleton/dist/skeleton.css";
 import { loadAllFiles } from "../../redux/loadThunk";
 import extensionHandler from "../../utils/extensionHandler";
-
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-  },
-  {
-    title: "Date Created",
-    dataIndex: "createDate",
-  },
-  {
-    title: "Size",
-    dataIndex: "size",
-    defaultSortOrder: "descend",
-    sorter: (a, b) => Number(a.size) - Number(b.size),
-  },
-  {
-    title: "Last Modified",
-    dataIndex: "modifyDate",
-  },
-];
-
-function onChange(pagination, filters, sorter, extra) {
-  console.log(sorter);
-}
 
 export default function FilesTable() {
   const [allReadyFiles, setAllReadyFiles] = useState([]);
@@ -71,7 +47,6 @@ export default function FilesTable() {
         loading={allReadyFiles.length > 0 ? false : true}
         columns={columns}
         dataSource={allReadyFiles.length > 0 ? allReadyFiles : [<Empty />]}
-        onChange={onChange}
         pagination={path === "/" ? false : true}
       ></Table>
     </div>
